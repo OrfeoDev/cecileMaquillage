@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ClientsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ClientsRepository::class)]
 class Clients
@@ -13,10 +14,27 @@ class Clients
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $nom = null;
+
 
     #[ORM\Column(length: 255)]
+    /**
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Votre nom ne doit pas contenir de chiffre"
+     * )
+     */
+    private ?string $nom = null;
+
+
+    #[ORM\Column(length: 255)]
+    /**
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Votre prenom ne doit pas contenir de chiffre"
+     * )
+     */
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
@@ -26,6 +44,10 @@ class Clients
     private ?string $adresse = null;
 
     #[ORM\Column(length: 5)]
+    /**
+     * @Assert\Regex ("/^[0-9]{5}/")
+     *
+     */
     private ?string $codepostal = null;
 
     #[ORM\Column(length: 20)]
