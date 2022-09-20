@@ -5,5 +5,8 @@
 {% block body %}
 {{ form_start(form) }}
     {{ form_label(form.nom) }}
+    {{ form_widget(form.nom) }}
+    <button type="submit">envoyer</button>
     {{ form_end(form) }}
+
 {% endblock %}

@@ -24,11 +24,11 @@ class ContactController extends AbstractController
             $manager->flush();
 
             $this->addFlash('success', 'Votre demande a bien ete envoyé');
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_homepage');
         }
 
         return $this->render('contact/index.html.twig', [
-            'form' => $form,
+            'form' => $form->createView()
         ]);
     }
 }
