@@ -3,9 +3,14 @@
 {% block title %}Hello HomepageController!{% endblock %}
 
 {% block body %}
-    {% for message in app.flashes('success') %}
-        <div class="flash-notice">
-            {{ message }}
+
+    {% for label, messages in app.flashes %}
+        <div class="text-center shadow alert alert-{{ label }} font-weight-bold">
+            {% for message in messages %}
+                <p>{{ message|raw }}</p>
+            {% endfor %}
         </div>
     {% endfor %}
+
+
 {% endblock %}
