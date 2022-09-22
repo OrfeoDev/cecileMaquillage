@@ -30,7 +30,11 @@
                     <div class="row">
                         {{ form_row(form.nom) }}
                         {{ form_row(form.prenom) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.adresse) }}
+                        {{ form_row(form.postalCode) }}
                         {{ form_row(form.description) }}
+
                     </div>
 
                     <div class="text-center mt-5">
@@ -39,6 +43,7 @@
 
                     {{ form_end(form) }}
                 </div>
+
             </div>
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-lg-4 text-center mb-5 mb-lg-0">
