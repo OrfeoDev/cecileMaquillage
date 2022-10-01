@@ -54,6 +54,14 @@ class Contact
     #[ORM\Column(length: 15)]
     private ?string $telephone = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\GreaterThan('+3 days',message: "La date du mariage doit etre superieure a 10 jours a compter de ce jour ")]
+    private ?\DateTimeInterface $jourMariage = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $ville = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -142,4 +150,35 @@ class Contact
 
         return $this;
     }
+
+    public function getJourMariage(): ?\DateTimeInterface
+    {
+        return $this->jourMariage;
+    }
+
+    public function setJourMariage(\DateTimeInterface $jourMariage): self
+    {
+        $this->jourMariage = $jourMariage;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+
+
+
+
+
+
 }
