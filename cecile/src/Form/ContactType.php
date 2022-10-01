@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Contact;
+
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -18,12 +20,21 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom',TextType::class)
-            ->add('prenom',TextType::class)
-            ->add('email',EmailType::class)
-            ->add('adresse',TextType::class)
-            ->add('postalCode',IntegerType::class)
-             ->add('description',TextareaType::class)
+            ->add('nom', TextType::class)
+            ->add('prenom', TextType::class)
+            ->add('email', EmailType::class)
+            ->add('adresse', TextType::class)
+            ->add('postalCode', IntegerType::class)
+            ->add('ville',TextType::class,[
+                'label'=>'Commune'
+            ])
+            ->add('description', TextareaType::class,[
+             'attr'  => ['placeholder'=>'Faites une courte desciption de ce que vous desirez , ou aura lieu le mariage ainsi que l\'heure du mariage'
+            ]])
+            ->add('telephone', NumberType::class)
+       ->add('jourMariage',DateType::class,[
+           'label' =>'Date du mariage',
+           'widget' => 'single_text',])
         ;
     }
 
