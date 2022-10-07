@@ -25,17 +25,17 @@ class ContactType extends AbstractType
             ->add('email', EmailType::class)
             ->add('adresse', TextType::class)
             ->add('postalCode', IntegerType::class)
-            ->add('ville',TextType::class,[
-                'label'=>'Commune'
+            ->add('ville', TextType::class, [
+                'label' => 'Commune'
             ])
-            ->add('description', TextareaType::class,[
-             'attr'  => ['placeholder'=>'Faites une courte desciption de ce que vous desirez , ou aura lieu le mariage ainsi que l\'heure du mariage'
-            ]])
+            ->add('description', TextareaType::class, [
+                'attr' => ['placeholder' =>
+                    'Faites une courte desciption de ce que vous souhaitez.'
+                ]])
             ->add('telephone', NumberType::class)
-       ->add('jourMariage',DateType::class,[
-           'label' =>'Date du mariage',
-           'widget' => 'single_text',])
-        ;
+            ->add('jourMariage', DateType::class, [
+                'label' => 'Date du mariage',
+                'widget' => 'single_text',]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

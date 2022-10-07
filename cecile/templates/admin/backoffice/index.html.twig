@@ -53,7 +53,10 @@
                                             <td>{{ contact.telephone }}</td>
                                             <td>{{ contact.jourMariage|date("m/d/Y") }}</td>
                                             <td>
-                                                <a href="{{ path('admin_suppression',{ "id":contact.id }) }}" class="btn btn-sm btn-outline-dark" onclick="return confirm('Voulez- vous vraiment supprimer ce client ?')">Supprimer</a> </td>
+                                                <a href="{{ path('admin_suppression',{ "id":contact.id }) }}"
+                                                   class="btn btn-sm btn-outline-dark"
+                                                   onclick="return confirm('Voulez- vous vraiment supprimer ce client ?')">Supprimer</a>
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                 </tboby>
@@ -65,4 +68,12 @@
         </div>
     </div>
 
+
+    <script>
+
+    </script>
+
+
+
 {% endblock %}
+

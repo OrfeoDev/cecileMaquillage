@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BackofficeController extends AbstractController
 {
-    #[Route('/admin/backoffice', name: 'app_admin_backoffice')]
+    #[Route('/admin/backoffice', name: 'app_admin_backoffice',methods:['GET'])]
     #[IsGranted('ROLE_ADMIN')]
     public function index(ContactRepository $contactRepository): Response
     {

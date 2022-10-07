@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ContactRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -60,6 +62,14 @@ class Contact
 
     #[ORM\Column(length: 255)]
     private ?string $ville = null;
+
+    #[ORM\OneToMany(mappedBy: 'contact', targetEntity: Status::class, orphanRemoval: true)]
+    private Collection $statut;
+
+    public function __construct()
+    {
+        $this->statut = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -171,6 +181,36 @@ class Contact
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Status>
+     */
+    public function getStatut(): Collection
+    {
+        return $this->statut;
+    }
+
+    public function addStatut(Status $statut): self
+    {
+        if (!$this->statut->contains($statut)) {
+            $this->statut->add($statut);
+            $statut->setContact($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatut(Status $statut): self
+    {
+        if ($this->statut->removeElement($statut)) {
+            // set the owning side to null (unless already changed)
+            if ($statut->getContact() === $this) {
+                $statut->setContact(null);
+            }
+        }
 
         return $this;
     }
