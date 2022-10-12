@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Contact;
+use App\Entity\Status;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -48,7 +49,25 @@ class AppFixtures extends Fixture
                 ->setDescription($faker->paragraph)
                 ->setJourMariage(new \DateTimeImmutable());
             $manager->persist($contact);
+        }
+        $status = [
+            [
+                "libelle" => " Non Traitée",
+                "valeur" => "todo "
+            ],
+            [
+                "libelle" => " Taitée",
+                "valeur" => "done "
+            ],
+        ];
 
+        foreach ($status as $arrayStatut) {
+            $status = new Status();
+            $status->setLibelle($arrayStatut["libelle"])
+                ->setValeur($arrayStatut["valeur"])
+                ->setContact($contact);
+
+            $manager->persist($status);
         }
         $manager->flush();
     }

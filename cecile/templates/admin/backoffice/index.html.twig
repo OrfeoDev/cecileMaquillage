@@ -12,7 +12,7 @@
             <div class="card border-secondary mb-3" style="max-width: 20rem;">
                 <div class="card-header">Mes Nouvelles demandes</div>
                 <div class="card-body">
-                    <h4 class="card-title"></h4>
+                    <h4 class="card-title">{{ contact|length }}</h4>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         card's content.</p>
                 </div>
@@ -27,7 +27,7 @@
                 <div class="card col-xl col-md">
                     <div class="card-header">
                         <div class="card-body">
-                            <table class="table table-hover table-light">
+                            <table class="table table-hover table-dark">
                                 <thead>
                                 <tr>
                                     <th scope="col">Nom</th>
@@ -37,6 +37,7 @@
                                     <th scope="col">Code Postal</th>
                                     <th scope="col">Telephone</th>
                                     <th scope="col"> Date du mariage</th>
+                                    <th scope="col"> Supprimer</th>
 
 
                                 </tr>
@@ -54,7 +55,7 @@
                                             <td>{{ contact.jourMariage|date("m/d/Y") }}</td>
                                             <td>
                                                 <a href="{{ path('admin_suppression',{ "id":contact.id }) }}"
-                                                   class="btn btn-sm btn-outline-dark"
+                                                   class="btn btn-sm btn-outline-light"
                                                    onclick="return confirm('Voulez- vous vraiment supprimer ce client ?')">Supprimer</a>
                                             </td>
                                         </tr>
@@ -69,11 +70,22 @@
     </div>
 
 
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
     <script>
+        const zero = document.querySelector('.card-title')
+        zero.addEventListener("click", () => {
+
+            console.log('ress')
+        })
+
 
     </script>
-
-
 
 {% endblock %}
 
