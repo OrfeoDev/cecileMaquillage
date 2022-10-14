@@ -53,7 +53,7 @@ class AppFixtures extends Fixture
             $statut = new Statut();
             $statut->setValeur($arrayStatut["valeur"])
                 ->setLibelle($arrayStatut["libelle"])
-                ->setContact($this);
+                ;
             $manager->persist($statut);
         }
         $manager->flush();
