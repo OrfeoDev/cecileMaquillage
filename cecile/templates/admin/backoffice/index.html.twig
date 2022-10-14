@@ -9,14 +9,35 @@
     <div class="container">
 
         <div class="row">
-            <div class="card border-secondary mb-3" style="max-width: 20rem;">
-                <div class="card-header">Mes Nouvelles demandes</div>
-                <div class="card-body">
-                    <h4 class="card-title">{{ contact|length }}</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
+            <div class="row">
+                <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Mes Nouvelles demandes</div>
+                    <div class="card-body">
+                        <h4 class="card-title"></h4>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                            card's content.</p>
+                    </div>
                 </div>
-            </div>
+
+                    <div class="card border-secondary mb-3 ms-3" style="max-width: 20rem;">
+                        <div class="card-header">Mes Nouvelles demandes</div>
+                        <div class="card-body">
+                            <h4 class="card-title"></h4>
+                            {#{% if contact.status.value == "todo" %}
+    <h3><span style="width: 100%"
+              class="shadow text-white badge bg-warning">{{ contact.status.libelle }}</span>
+    </h3>
+{% else %}
+    <h3><span style="width: 100%"
+              class="shadow text-white badge bg-success">{{ contact.status.libelle }}</span>
+    </h3>
+
+{% endif %}  #}
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                card's content.</p>
+                        </div>
+                    </div>
+
 
             <section>
                 <div>
@@ -54,11 +75,24 @@
                                             <td>{{ contact.telephone }}</td>
                                             <td>{{ contact.jourMariage|date("m/d/Y") }}</td>
                                             <td>
-                                                <a href="{{ path('admin_suppression',{ "id":contact.id }) }}"
+                                              <a href="{{ path('admin_suppression',{ "id":contact.id }) }}"
                                                    class="btn btn-sm btn-outline-light"
                                                    onclick="return confirm('Voulez- vous vraiment supprimer ce client ?')">Supprimer</a>
+
                                             </td>
+
+                                            {% if contact.statut == "todo" %}
+
+                                            <p class="testTop">ok</p>
+                                                <button class="btn btn-success"> ca fontion</button>
+
+                                            {% else %}
+                                                <button class="btn-outline-dark">gg</button>
+                                                <p>pas ok</p>
+                                                {% endif %}
                                         </tr>
+
+
                                     {% endfor %}
                                 </tboby>
                             </table>
@@ -68,8 +102,7 @@
             </div>
         </div>
     </div>
-
-
+    </div>
 
 
 
@@ -78,11 +111,6 @@
 
 {% block javascripts %}
     <script>
-        const zero = document.querySelector('.card-title')
-        zero.addEventListener("click", () => {
-
-            console.log('ress')
-        })
 
 
     </script>

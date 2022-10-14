@@ -3,7 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Contact;
-use App\Entity\Status;
+use App\Entity\Statut;
+
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -36,20 +37,7 @@ class AppFixtures extends Fixture
             ->setRoles(['ROLE_ADMIN']);
         $manager->persist($admin);
 
-        for ($c = 0; $c < 10; $c++) {
 
-            $contact = new Contact();
-            $contact->setNom($faker->name)
-                ->setPrenom($faker->lastName)
-                ->setEmail($faker->email)
-                ->setAdresse($faker->address)
-                ->setPostalCode('34000')
-                ->setVille($faker->country)
-                ->setTelephone('0467896554')
-                ->setDescription($faker->paragraph)
-                ->setJourMariage(new \DateTimeImmutable());
-            $manager->persist($contact);
-        }
         $status = [
             [
                 "libelle" => " Non Traitée",
@@ -62,12 +50,11 @@ class AppFixtures extends Fixture
         ];
 
         foreach ($status as $arrayStatut) {
-            $status = new Status();
-            $status->setLibelle($arrayStatut["libelle"])
-                ->setValeur($arrayStatut["valeur"])
-                ->setContact($contact);
-
-            $manager->persist($status);
+            $statut = new Statut();
+            $statut->setValeur($arrayStatut["valeur"])
+                ->setLibelle($arrayStatut["libelle"])
+                ->setContact($this);
+            $manager->persist($statut);
         }
         $manager->flush();
     }

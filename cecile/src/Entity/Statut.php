@@ -2,24 +2,24 @@
 
 namespace App\Entity;
 
-use App\Repository\StatusRepository;
+use App\Repository\StatutRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: StatusRepository::class)]
-class Status
+#[ORM\Entity(repositoryClass: StatutRepository::class)]
+class Statut
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $libelle = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $valeur = null;
 
-    #[ORM\ManyToOne(inversedBy: 'statut')]
+    #[ORM\ManyToOne(inversedBy: 'statuts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Contact $contact = null;
 

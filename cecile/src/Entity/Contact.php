@@ -57,18 +57,18 @@ class Contact
     private ?string $telephone = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\GreaterThan('+3 days',message: "La date du mariage doit etre superieure a 10 jours a compter de ce jour ")]
+    #[Assert\GreaterThan('+3 days', message: "La date du mariage doit etre superieure a 10 jours a compter de ce jour ")]
     private ?\DateTimeInterface $jourMariage = null;
 
     #[ORM\Column(length: 255)]
     private ?string $ville = null;
 
-    #[ORM\OneToMany(mappedBy: 'contact', targetEntity: Status::class, orphanRemoval: true)]
-    private Collection $statut;
+    #[ORM\OneToMany(mappedBy: 'contact', targetEntity: Statut::class)]
+    private Collection $statuts;
 
     public function __construct()
     {
-        $this->statut = new ArrayCollection();
+        $this->statuts = new ArrayCollection();
     }
 
 
@@ -173,11 +173,6 @@ class Contact
         return $this;
     }
 
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
@@ -185,27 +180,32 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return Collection<int, Status>
-     */
-    public function getStatut(): Collection
+    public function getVille(): ?string
     {
-        return $this->statut;
+        return $this->ville;
     }
 
-    public function addStatut(Status $statut): self
+    /**
+     * @return Collection<int, Statut>
+     */
+    public function getStatuts(): Collection
     {
-        if (!$this->statut->contains($statut)) {
-            $this->statut->add($statut);
+        return $this->statuts;
+    }
+
+    public function addStatut(Statut $statut): self
+    {
+        if (!$this->statuts->contains($statut)) {
+            $this->statuts->add($statut);
             $statut->setContact($this);
         }
 
         return $this;
     }
 
-    public function removeStatut(Status $statut): self
+    public function removeStatut(Statut $statut): self
     {
-        if ($this->statut->removeElement($statut)) {
+        if ($this->statuts->removeElement($statut)) {
             // set the owning side to null (unless already changed)
             if ($statut->getContact() === $this) {
                 $statut->setContact(null);
@@ -214,11 +214,6 @@ class Contact
 
         return $this;
     }
-
-
-
-
-
 
 
 }
